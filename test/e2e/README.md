@@ -15,16 +15,17 @@ If you're adding a new test prefer a new component instead of editing existing f
 
 We're using [`playwright`](https://playwright.dev) to replay user actions.
 Each test tests only a single fixture.
-A fixture can be loaded with `await renderFixture(fixturePath)` e.g. `renderFixture('Unstable_TrapFocus/OpenTrapFocus')`.
+A fixture can be loaded with `await renderFixture(fixturePath)`, for example `renderFixture('FocusTrap/OpenFocusTrap')`.
 
 ## Commands
 
-For development `yarn test:e2e:dev` and `yarn test:e2e:run --watch` in separate terminals is recommended.
+For development, run `pnpm test:e2e:dev` in one terminal and `pnpm -F ./test/e2e test --watch`
+in another terminal.
 
-| command                | description                                                                                   |
-| ---------------------- | --------------------------------------------------------------------------------------------- |
-| `yarn test:e2e`        | Full run                                                                                      |
-| `yarn test:e2e:dev`    | Prepares the fixtures to be able to test in watchmode                                         |
-| `yarn test:e2e:run`    | Runs the tests (requires `yarn test:e2e:dev` or `yarn test:e2e:build`+`yarn test:e2e:server`) |
-| `yarn test:e2e:build`  | Builds the webpack bundle for viewing the fixtures                                            |
-| `yarn test:e2e:server` | Serves the fixture bundle.                                                                    |
+| command                           | description                                                                   |
+| :-------------------------------- | :---------------------------------------------------------------------------- |
+| `pnpm test:e2e`                   | Full run. Builds the fixtures, starts the preview server, and runs the tests. |
+| `pnpm test:e2e:dev`               | Starts the Vite dev server for the fixture app on port `5001`.                |
+| `pnpm -F ./test/e2e test --watch` | Runs the e2e tests in watch mode against the running dev server.              |
+| `pnpm -F ./test/e2e build`        | Builds the Vite fixture app.                                                  |
+| `pnpm -F ./test/e2e server`       | Serves the built fixture app on port `5001`.                                  |

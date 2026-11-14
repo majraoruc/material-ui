@@ -1,11 +1,12 @@
+import { describe, it, expect, beforeEach } from 'vitest';
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { expect } from 'chai';
-import { createClientRender, describeConformance, screen } from 'test/utils';
+import { createRenderer, screen } from '@mui/internal-test-utils';
 import CardMedia, { cardMediaClasses as classes } from '@mui/material/CardMedia';
+import describeConformance from '../../test/describeConformance';
 
 describe('<CardMedia />', () => {
-  const render = createClientRender();
+  const { render } = createRenderer();
 
   describeConformance(<CardMedia image="/fake.png" />, () => ({
     classes,
@@ -15,7 +16,6 @@ describe('<CardMedia />', () => {
     refInstanceof: window.HTMLDivElement,
     testComponentPropWith: 'span',
     testVariantProps: { variant: 'foo' },
-    skip: ['componentsProp'],
   }));
 
   it('has the img role if `image` is defined', () => {
